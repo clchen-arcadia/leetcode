@@ -37,8 +37,8 @@ var maxIncreaseKeepingSkyline = function(grid) {
                 skylineEast[n - 1 - cell[0]],
                 skylineSouth[cell[1]],
                 skylineWest[cell[0]],
-            )
-            const differentialHeight = maxAllowed - grid[cell[0]][cell[1]];
+        );
+        const differentialHeight = maxAllowed - grid[cell[0]][cell[1]];
         switch (true) {
             case (differentialHeight < 0): {
                 console.log("At cell ", cell, ". 0 is outputed");
@@ -75,7 +75,7 @@ function getSkyline(grid, direction) {
             for (let i=0; i < n; i++) {
                 let height = -Infinity;
                 for (let j=0; j < n; j++) {
-                    const cellHeight = grid[n - 1 - i][j]
+                    const cellHeight = grid[n - 1 - i][j];
                     if (cellHeight > height) {
                         height = cellHeight;
                     }
@@ -89,7 +89,7 @@ function getSkyline(grid, direction) {
             for (let i=0; i < n; i++) {
                 let height = -Infinity;
                 for (let j=0; j < n; j++) {
-                    const cellHeight = grid[j][i]
+                    const cellHeight = grid[j][i];
                     if (cellHeight > height) {
                         height = cellHeight;
                     }
@@ -103,7 +103,7 @@ function getSkyline(grid, direction) {
             for (let i=0; i < n; i++) {
                 let height = -Infinity;
                 for (let j=0; j < n; j++) {
-                    const cellHeight = grid[i][j]
+                    const cellHeight = grid[i][j];
                     if (cellHeight > height) {
                         height = cellHeight;
                     }
