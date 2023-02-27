@@ -10,8 +10,8 @@
 
 ## What I learned
 
-This was a great case for using switch-cases.
-Add block scoping to the cases to avoid SyntaxErrors when declaring a variable of the same name in multiple cases.
+This was a great case for using switch-cases.  
+Add block scoping to the cases to avoid SyntaxErrors when declaring a variable of the same name in multiple cases.  
 There's another trick with switch-cases: switch on expression (true) and you can uses cases on expressions that evalute to booleans to replicate multiple if-else blocks.
 
 It was tough to visualize rows and columns versus indices on a grid, so a test run with console.log(skylineNorth, East, ...) was a must.
