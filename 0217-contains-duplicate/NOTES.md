@@ -1,4 +1,4 @@
-​# Contains duplicate
+# Contains duplicate
 
 Pretty simple one, using a set here adds minor performance improvements.
 
