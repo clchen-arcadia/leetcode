@@ -21,5 +21,16 @@ var maxDepth = function(root) {
       );
     }
 
-    return _recurseMaxDepth(root, 1);
+    function _recurseHelp(nodeOrNull, depth) {
+      if(nodeOrNull === null) return 0;
+      if(!nodeOrNull.left && !nodeOrNull.right) return depth;
+
+      return Math.max(
+        _recurseHelp(nodeOrNull.left, depth + 1),
+        _recurseHelp(nodeOrNull.right, depth + 1),
+      );
+    }
+
+    // return _recurseMaxDepth(root, 1);
+    return _recurseHelp(root, 1);
 };
