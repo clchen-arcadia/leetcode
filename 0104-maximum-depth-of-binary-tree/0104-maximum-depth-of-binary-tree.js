@@ -31,6 +31,13 @@ var maxDepth = function(root) {
       );
     }
 
+    function _recurseNoParam(node) {
+      if (node === null) return 0;
+
+      return 1 + Math.max(_recurseNoParam(node.left), _recurseNoParam(node.right));
+    }
+
     // return _recurseMaxDepth(root, 1);
-    return _recurseHelp(root, 1);
+    // return _recurseHelp(root, 1);
+    return _recurseNoParam(root);
 };
