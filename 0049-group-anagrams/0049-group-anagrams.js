@@ -1,9 +1,12 @@
 /**
  * Pseudocode:
  *    create a letter-freq counter for each word
- *    build a large object where each key is each unique letter-freq counter
- *      you can't use objects as keys.
- *    once all the strings are ingested, create the nested list and output
+ *    use shadow equality checker to compare letter-freq counters to group anagrams
+ *    scan and clean this list to get the nested array output
+ *
+ * Pseudocode 2:
+ *    comparing two strings sorted will be equal IFF they are anagrams
+ *    leverage this to speed up the algorithm
  */
 
 /**
@@ -15,12 +18,12 @@ var groupAnagrams = function(strs) {
   const nestedTaggedWords = [];
 
   for (let str of strs) {
-    const tempLetterFreqCount = buildLetterFreqCounter(str);
-    const insertTuple = [[str], tempLetterFreqCount];
+    const sortedString = Array.from(str).sort().join('');
+    const insertTuple = [[str], sortedString];
 
     let insertBool = false;
     for (let tuple of nestedTaggedWords) {
-      if (checkShallowEquality(tuple[1], insertTuple[1])) {
+      if (tuple[1] === insertTuple[1]) {
         tuple[0].push(str);
         insertBool = !insertBool;
         break;
