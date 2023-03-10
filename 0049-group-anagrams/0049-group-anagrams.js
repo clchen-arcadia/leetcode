@@ -22,7 +22,8 @@ var groupAnagrams = function(strs) {
     for (let tuple of nestedTaggedWords) {
       if (checkShallowEquality(tuple[1], insertTuple[1])) {
         tuple[0].push(str);
-        insertBool = !insertBool
+        insertBool = !insertBool;
+        break;
       }
     }
     if (!insertBool) {
