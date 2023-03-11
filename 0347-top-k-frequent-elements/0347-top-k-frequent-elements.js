@@ -15,24 +15,20 @@
 var topKFrequent = function (nums, k) {
   const freqCount = buildLetterFreqCounter(nums);
 
-  console.log("freqCount is", freqCount);
-
   const keys = Object.keys(freqCount);
 
   const topElements = [];
 
+  // Seed first k elements as tuples, first the element, then its count
   for (let i = 0; i < k; i++) {
     topElements.push([keys[i], freqCount[keys[i]]]);
   }
 
+  // Sort the tuples from highest freq count to lowest
   topElements.sort((a, b) => b[1] - a[1]);
 
-  console.log("topElements sorted to", topElements);
-  for (let tuple of topElements) {
-    console.log("tuple is ", tuple);
-
-  }
-
+  // Loop over the remaining elements, if the count is higher than the lowest count,
+  // then replace that element tuple and resort the list.
   for (let i = k; i < keys.length; i++) {
     if (freqCount[keys[i]] > topElements[topElements.length - 1][1]) {
       topElements[topElements.length - 1] = [keys[i], freqCount[keys[i]]];
@@ -40,6 +36,7 @@ var topKFrequent = function (nums, k) {
     }
   }
 
+  // Clean the list by remove the tuple count, and leaving only the element
   for (let idx in topElements) {
     topElements[idx] = topElements[idx][0];
   }
@@ -61,6 +58,3 @@ function buildLetterFreqCounter(str) {
 
   return letterFreqCounter;
 }
-
-console.log(topKFrequent([6, 0, 1, 4, 9, 7, -3, 1, -4, -8, 4, -7, -3, 3, 2, -3, 9, 5, -4, 0],
-  6));
