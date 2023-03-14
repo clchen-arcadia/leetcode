@@ -18,25 +18,17 @@ var topKFrequent = function (nums, k) {
 
   const topElementsHeap = new MaxHeap((a, b) => a[1] - b[1]);
 
-  console.log(`freqCount is ${freqCount}`);
-
   for (const [key, val] of Object.entries(freqCount)) {
-    console.log(`key is ${key} and value is ${val}`);
     topElementsHeap.push([key, val]);
-    console.log("topElementsHeap is", topElementsHeap.tree);
   }
 
-  console.log(`topElementsHeap is ${topElementsHeap.tree}`);
 
   const topElements = [];
 
   for (let i=0; i < k; i++) {
-    console.log("topElementsHeap before pop is", topElementsHeap.tree);
 
     const topElement = topElementsHeap.pop();
-    console.log("topElementsHeap after pop is", topElementsHeap.tree);
 
-    console.log(`topElement is ${topElement}`);
 
     topElements.push(topElement[0]);
   }
