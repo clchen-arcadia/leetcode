@@ -16,7 +16,7 @@ var carFleet = function (target, positions, speeds) {
   stitchedVectors.sort((a, b) => a[0] - b[0]);
 
   let fleetsCount = 0;
-  let timeToTarget = -Infinity;
+  let timeToTarget = -1;
 
   while (stitchedVectors.length !== 0) {
     const currVector = stitchedVectors.pop();
