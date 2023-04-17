@@ -5,26 +5,21 @@
 var trap = function(heights) {
     if (heights.length < 3) return 0;
     
-    const maxLefts = [];
-    let tempMaxLeft = heights[0];
-    for (let i = 0; i < heights.length; i++) {
-        if (heights[i] > tempMaxLeft) tempMaxLeft = heights[i];
-        maxLefts.push(tempMaxLeft);
-    }
+    let [maxLeft, maxRight] = [heights[0], heights[heights.length - 1]];
+    let [left, right] = [1, heights.length - 2];
     
-    const maxRights = [];
-    let tempMaxRight = heights[heights.length - 1];
-    for (let i = heights.length - 1; i >= 0; i--) {
-        if (heights[i] > tempMaxRight) tempMaxRight = heights[i];
-        maxRights.push(tempMaxRight);
-    }
-    maxRights.reverse();
-        
     let totalRain = 0;
     
-    for (let i = 0; i < heights.length; i++) {
-        const tempAns = Math.min(maxLefts[i], maxRights[i]) - heights[i];
-        if (tempAns > 0) totalRain += tempAns;
+    while (left <= right) {
+        if (maxLeft < maxRight) {
+            if (heights[left] > maxLeft) maxLeft = heights[left];
+            else totalRain += maxLeft - heights[left];
+            left++;
+        } else {
+            if (heights[right] > maxRight) maxRight = heights[right];
+            else totalRain += maxRight - heights[right];
+            right--;
+        }
     }
     
     return totalRain;
