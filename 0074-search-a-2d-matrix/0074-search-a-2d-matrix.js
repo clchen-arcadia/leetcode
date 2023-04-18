@@ -4,55 +4,41 @@
  * @return {boolean}
  */
 var searchMatrix = function(matrix, target) {
-    let [leftM, rightM] = [0, matrix.length - 1];
-    let checkM = null;
+  const [rows, cols] = [matrix.length, matrix[0].length];
 
-    while (leftM <= rightM) {
-      checkM = Math.floor((leftM + rightM) / 2);
-      const checkVal = matrix[checkM][0];
+  let [topRow, botRow] = [0, rows - 1];
+  let checkRow = null;
 
-      if (checkVal === target) {
-        return true;
-      } else if (checkVal > target) {
-        rightM = checkM - 1;
-      } else if (checkVal < target) {
-        //we want the largest row idx M with matrix[M][0] less than target
-        leftM = checkM;
-      }
+  while (topRow <= botRow) {
+    checkRow = Math.floor((topRow + botRow) / 2);
+    const checkValSmall = matrix[checkRow][0];
+    const checkValLarge = matrix[checkRow][cols - 1];
 
-      if (rightM - leftM <= 1) {
-        if (
-          matrix[leftM]?.[0] === target
-          || matrix[rightM]?.[0] === target
-          ) return true;
-        else if(matrix[rightM]?.[0] < target) {
-          checkM = rightM;
-          break;
-        } else {
-          checkM = leftM;
-          break;
-        }
-      }
+    if (checkValSmall > target) {
+      botRow = checkRow - 1;
+    } else if (checkValLarge < target) {
+      topRow = checkRow + 1;
+    } else {
+      break;
     }
+  }
 
-    // binary search on row idx checkM
+  if (topRow > botRow) return false;
 
-    let [leftN, rightN] = [0, matrix[checkM].length - 1]
-    let checkN = null;
+  let [left, right] = [0, cols - 1];
 
-    while (leftN <= rightN) {
-      checkN = Math.floor((leftN + rightN) / 2);
-      const checkVal = matrix[checkM][checkN];
+  while (left <= right) {
+    const checkCol = Math.floor((left + right) / 2);
+    const checkVal = matrix[checkRow][checkCol];
 
-      if (checkVal === target) return true;
-      else if (checkVal > target) {
-        rightN = checkN - 1;
-      } else if (checkVal < target) {
-        leftN = checkN + 1;
-      }
-
+    if (checkVal > target) {
+      right = checkCol - 1;
+    } else if (checkVal < target) {
+      left = checkCol + 1;
+    } else {
+      return true;
     }
+  }
 
-    return false;
-
+  return false;
 };
