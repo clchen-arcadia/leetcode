@@ -55,9 +55,9 @@ var characterReplacement = function(s, k) {
   return best;
 };
 
-console.log(
-  characterReplacement(
-  "AABABBA",
-  1
-  )
-);
+// console.log(
+//   characterReplacement(
+//   "AABABBA",
+//   1
+//   )
+// );
