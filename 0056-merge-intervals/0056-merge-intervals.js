@@ -53,5 +53,3 @@ function mergeMany(...intervals) {
     Math.max(...intervals.map(i => i[1]))
   ];
 }
-
-console.log(merge([[2,3],[2,2],[3,3],[1,3],[5,7],[2,2],[4,6]]));
