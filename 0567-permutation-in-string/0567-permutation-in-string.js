@@ -16,7 +16,7 @@ var checkInclusion = function(s1, s2) {
     if (checkFreqCounterEquality(s1FreqC, s2SubstringFreqC)) return true;
 
     const leftChar = s2[window[0]];
-    const newChar = s2[window[1] + 1]; // might be undefined
+    const newChar = s2[window[1] + 1];
 
     s2SubstringFreqC[leftChar]--;
     if (s2SubstringFreqC[leftChar] === 0) delete s2SubstringFreqC[leftChar];
@@ -69,3 +69,5 @@ function checkFreqCounterEquality(freqC1, freqC2) {
 
   return true;
 }
+
+console.log(checkFreqCounterEquality(getFreqCounter('asdfasdf'), getFreqCounter('fdsafdsa')));
