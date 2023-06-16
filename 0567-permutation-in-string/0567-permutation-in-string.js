@@ -69,5 +69,3 @@ function checkFreqCounterEquality(freqC1, freqC2) {
 
   return true;
 }
-
-console.log(checkFreqCounterEquality(getFreqCounter('asdfasdf'), getFreqCounter('fdsafdsa')));
