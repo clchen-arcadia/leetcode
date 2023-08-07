@@ -1,32 +1,28 @@
 class Solution:
     def groupAnagrams(self, strs: list[str]) -> list[list[str]]:
-        strs_tuples = [(str, self.get_freq_counter(str)) for str in strs]
+        strs_tuples = [(str, self.get_freq_counter_t(str)) for str in strs]
 
-        output_tuples = []
+        output_dict = {}
 
         for str_tuple in strs_tuples:
             og_str = str_tuple[0]
-            str_freq_c = str_tuple[1]
+            str_freq_c_t = str_tuple[1]
 
-            is_insert = False
+            anagrams = output_dict.get(str_freq_c_t)
+            if anagrams is None:
+                output_dict[str_freq_c_t] = [og_str]
+            else:
+                anagrams.append(og_str)
 
-            for output_t in output_tuples:
-                template_freq_c = output_t[0]
-                anagrams = output_t[1]
-                if template_freq_c == str_freq_c:
-                    anagrams.append(og_str)
-                    is_insert = True
-                    break
+        return list(output_dict.values())
 
-            if is_insert is False:
-                output_tuples.append((str_freq_c, [og_str]))
-
-        return [t[1] for t in output_tuples]
-
-    def get_freq_counter(self, str):
-        freq_counter = {}
+    def get_freq_counter_t(self, str):
+        """
+        Assumes strings composed of only lowercase a-z
+        """
+        freq_counter = [0] * 26
 
         for char in str:
-            freq_counter[char] = freq_counter.get(char, 0) + 1
+            freq_counter[ord(char) - ord('a')] += 1
 
-        return freq_counter
+        return tuple(freq_counter)
