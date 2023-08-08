@@ -6,10 +6,9 @@ class Solution:
         for num in nums:
             if (num - 1) in set_nums:
                 continue
-            candidate = 0
-            while num in set_nums:
-                num += 1
-                candidate += 1
-            longest = max(longest, candidate)
+            length = 1
+            while (num + length) in set_nums:
+                length += 1
+            longest = max(longest, length)
 
         return longest
