@@ -13,10 +13,8 @@ class Solution:
             if c in opened:
                 stack.append(c)
             if c in closed:
-                if len(stack) == 0:
+                if len(stack) == 0 or stack[-1] != parens_map[c]:
                     return False
-                top = stack.pop()
-                if parens_map[c] != top:
-                    return False
+                stack.pop()
 
         return len(stack) == 0
