@@ -1,21 +1,28 @@
 class Solution:
-    def threeSum(self, nums: list[int]) -> list[list[int]]:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        res = []
         nums.sort()
-        triplets_set = set()
 
-        i = 0
-        while not nums[i] > 0 and i < len(nums) - 2:
-            j, k = i + 1, len(nums) - 1
-            while j < k:
-                sum = nums[i] + nums[j] + nums[k]
-                if sum < 0:
-                    j += 1
-                elif sum > 0:
-                    k -= 1
+        for i, a in enumerate(nums):
+            # Skip positive integers
+            if a > 0:
+                break
+
+            if i > 0 and a == nums[i - 1]:
+                continue
+
+            l, r = i + 1, len(nums) - 1
+            while l < r:
+                threeSum = a + nums[l] + nums[r]
+                if threeSum > 0:
+                    r -= 1
+                elif threeSum < 0:
+                    l += 1
                 else:
-                    triplets_set.add((nums[i], nums[j], nums[k]))
-                    j += 1
-                    k -= 1
-            i += 1
-
-        return [list(t) for t in triplets_set]
+                    res.append([a, nums[l], nums[r]])
+                    l += 1
+                    r -= 1
+                    while nums[l] == nums[l - 1] and l < r:
+                        l += 1
+                        
+        return res
