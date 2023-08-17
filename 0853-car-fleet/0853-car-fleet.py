@@ -1,13 +1,9 @@
 class Solution:
     def carFleet(self, target: int, position: list[int], speed: list[int]) -> int:
-        cars_pos_and_speed = []
+        cars_pos_and_speed = list(zip(position, speed))
 
-        for i in range(len(position)):
-            cars_pos_and_speed.append(
-                (position[i], speed[i])
-            )
+        cars_pos_and_speed.sort(reverse=True)
 
-        cars_pos_and_speed.sort(key=lambda x: -1 * x[0])
         fleet_arrival_times = []
 
         # print("cars_post_and_speed is", cars_pos_and_speed)
@@ -23,7 +19,7 @@ class Solution:
             if curr_time_of_arrival > curr_fleet_time_of_arrival:
                 fleet_arrival_times.append(curr_time_of_arrival)
                 # print("appended to fleet_arrival_times")
-            else:  # curr_time_of_arrival >= curr_fleet_time_of_arrival
+            else:  # curr_time_of_arrival <= curr_fleet_time_of_arrival
                 # print("not appended to fleet_arrival_times")
                 continue
 
