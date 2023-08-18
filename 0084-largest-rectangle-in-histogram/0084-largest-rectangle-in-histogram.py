@@ -1,30 +1,31 @@
 class Solution:
     def largestRectangleArea(self, heights: list[int]) -> int:
-        left_bounds = [0] * len(heights)
-        right_bounds = [len(heights) - 1] * len(heights)
-
-        for i in range(1, len(heights)):
-            curr_height = heights[i]
-            search = i
-            while search > 0 and heights[search - 1] >= curr_height:
-                search = left_bounds[search - 1]
-            left_bounds[i] = search
-
-        for i in range(len(heights) - 2, -1, -1):
-            curr_height = heights[i]
-            search = i
-            while search < len(heights) - 1 and heights[search + 1] >= curr_height:
-                search = right_bounds[search + 1]
-            right_bounds[i] = search
-
-        # print("left_bounds=", left_bounds)
-        # print("right_bounds=", right_bounds)
-
         max_area = 0
-        for i in range(len(heights)):
+        stack = [] # like (idx, height)
+
+        for curr_idx, curr_height in enumerate(heights):
+            start = curr_idx
+
+            while stack and stack[-1][1] > curr_height:
+                # curr_idx is the right bound
+                (stack_idx, stack_height) = stack.pop()
+
+                max_area = max(
+                    max_area,
+                    (curr_idx - stack_idx) * stack_height
+                )
+
+                start = stack_idx
+
+            stack.append((start, curr_height))
+
+        while stack:
+            # len(heights) is the right bound
+            (stack_idx, stack_height) = stack.pop()
+
             max_area = max(
                 max_area,
-                (right_bounds[i] - left_bounds[i] + 1) * heights[i]
+                (len(heights) - stack_idx) * stack_height
             )
 
         return max_area
